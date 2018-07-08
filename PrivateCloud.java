@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-
+/**
+ * @author HUSTCS CPSS sjy
+ * all "new" functions are not suggested because of low efficiency
+ */
 public class PrivateCloud
 {
 	private BigInteger lambda;
@@ -192,7 +195,12 @@ public class PrivateCloud
 
     
   
-    //明文除法协议   被除数加密，除数明文
+    /**
+     * 
+     * @param ea on the public cloud
+     * @param b on the public cloud
+     * @return [a/b] on the public cloud, but the private cloud knows nothing about any parameter
+     */
     public void SEDD()
     {
     	try
@@ -212,17 +220,25 @@ public class PrivateCloud
     	}
     }
     
-    //安全比较协议------私有云端
+    /**
+     * 
+     * @param ea on the public cloud
+     * @param eb on the public cloud
+     * @return [a>=b] on the public cloud, but the private cloud knows nothing about any parameter
+     */
     public void secure_compare()
     {
-    	//后边带///!!的代码取消注释，可以将函数变成BGK比较函数
+    	/*restoring the codes with///////////////////!!!!!!!!!!!!!!!!!!!!!! 
+    	 * on both the public and private cloud
+    	 * can turn this function to BGK compare function
+    	whose prototype is:   BigInteger BGK(ec,ed)  return [c>d]*/
     	int l=0;
     	try
     	{
-			parameter1=br.readLine();//接收到l
+			parameter1=br.readLine();//get l
 			BigInteger paotui=new BigInteger(parameter1);
 			l=paotui.intValue();
-			parameter1=br.readLine();//接收到ez
+			parameter1=br.readLine();//get ez
 			BigInteger ez=new BigInteger(parameter1);
 			BigInteger z = Decryption(ez);
 			BigInteger d = z.mod(BigInteger.valueOf(2).pow(l));
@@ -233,14 +249,14 @@ public class PrivateCloud
 			BigInteger dprime=d;
 			for(i=0;i<l;i++)
 			{
-				//向客户端返回d的每一位，[di]
+				//return every bit of d，[di], to the public cloud
 				outMessage = Encryption(dprime.mod(BigInteger.valueOf(2))).toString();
 	            pw.println(outMessage);
 	            pw.flush();
 	            dprime = dprime.shiftRight(1);
 			}
 			BigInteger result=BigInteger.ZERO;
-			//从客户端接收乱序的[ci],有ci为0，则deltaB为1
+			//get disordered [ci], if any ci is 0, deltaB is 1
 			for(i=0;i<=l;i++)
 			{
 				
@@ -249,15 +265,15 @@ public class PrivateCloud
 				if(Decryption(eci).intValue()==0)
 					result=BigInteger.ONE;
 			}
-			//将[deltaB]发送给客户端
+			//return [deltaB] to the public cloud
 			outMessage=Encryption(result).toString();
 			pw.println(outMessage);
 	        pw.flush();
 	        
 	        
-	        //DGK结束
+	        //DGK ends
 	        
-	        //将[z÷2^l]发给客户端
+	        //return [z÷2^l] to the public cloud
 	        outMessage=zdivide2l.toString();
 			pw.println(outMessage);
 	        pw.flush();
@@ -265,7 +281,13 @@ public class PrivateCloud
     	catch(Exception e){}
     }
     
-    //扰乱的安全乘法----私有云端
+    /**
+     * 
+     * @param ea on the public cloud
+     * @param eb on the public cloud
+     * @return [a*b] on the public cloud, 
+     * but the private cloud knows nothing about any parameter
+     */
 	public void secure_multiply()
 	{
 		try
@@ -283,7 +305,9 @@ public class PrivateCloud
 		catch(Exception e){}
 	}
 	
-	//扰乱的安全奇偶判断--------私有云端
+	/**
+	 * 
+	 */
 	public void secure_LSB()
 	{
 		try
