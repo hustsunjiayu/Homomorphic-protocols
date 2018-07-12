@@ -1,5 +1,5 @@
-# Homomorphic-protocols
-Some Homomorphic protocols on semihonest Hybrid Cloud based on Pailliar encryption system, and you can also find all functions in Paillier cryptosystem, such as keyGeneration(), Encryption(), Decryption() and so on.
+# Paillier based Homomorphic-protocols
+Some Homomorphic protocols on semihonest Hybrid Cloud based on Pailliar cryptosystem, and you can also find all basic functions in Paillier cryptosystem, such as keyGeneration(), Encryption(), Decryption() and so on.
 
 The protocols implement homomorphic operations including:
 1. add(not a protocol but local)
