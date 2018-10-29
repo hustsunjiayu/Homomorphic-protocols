@@ -10,7 +10,7 @@ The protocols implement homomorphic operations including:
 6. equal(if a==b)
 7. bitDecomposition
 8. ifOdd
-9. xor or and (the input parameters must be 1bit before encrypted)
+9. xor or and (the input parameters must be 0 or 1 before encrypted)
 10. and so on....
 
 More details about the theories:
